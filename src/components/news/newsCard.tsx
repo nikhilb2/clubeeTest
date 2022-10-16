@@ -5,6 +5,7 @@ import theme from "src/theme"
 
 import Link from "next/link"
 import Image from "next/image"
+import { Box } from "@mui/system"
 
 const styles: { [key: string]: SxProps } = {
   container: {
@@ -53,17 +54,16 @@ const styles: { [key: string]: SxProps } = {
     textOverflow: "ellipsis",
     //color: theme.palette.secondary.main,
     fontSize: "18px",
-    lineHeight: "150%",
-    height: "51px",
+    //lineHeight: "150%",
 
     fontWeight: 500,
 
     WebkitBoxOrient: "vertical",
     WebkitLineClamp: 2,
+    pt: 3,
 
     [theme.breakpoints.down("sm")]: {
       fontSize: "15px",
-      height: "41px",
     },
   },
   customBoxDescription: {
@@ -98,35 +98,41 @@ const NewsCard = (props: { random: number }) => {
   return (
     <Link href={`/`} as={`/`}>
       <a>
-        <Stack sx={styles.container}>
-          <Stack sx={styles.image} className="newsImage">
-            <Image
-              quality={100}
-              src={`https://loremflickr.com/500/400/sports?random=${props.random}`}
-              alt={"test"}
-              width="100%"
-              height="334px"
-              objectFit="cover"
-            />
-          </Stack>
-          <Stack padding={"24px 16px"} height="100%">
-            <Typography variant="h5" sx={styles.customBoxTitle}>
-              {"Test titlte"}
-            </Typography>
-            <Typography sx={styles.customBoxDescription}>
-              This is a very long test description. This is a very long test
-              description. This is a very long test description.This is a very
-              long test description. This is a very long test description. This
-              is a very long test description. This is a very long test
-              description.This is a very long test description. This is a very
-              long test description. This is a very long test description. This
-              is a very long test description.This is a very long test
-              description.
-            </Typography>
+        <article>
+          <Stack sx={styles.container}>
+            <Stack sx={styles.image} className="newsImage">
+              <Image
+                quality={100}
+                src={`https://loremflickr.com/500/400/sports?random=${props.random}`}
+                alt={"test"}
+                width="100%"
+                height="334px"
+                objectFit="cover"
+              />
+            </Stack>
+            <Stack padding={theme.spacing(3)} spacing={2}>
+              <Typography variant="h5" sx={styles.customBoxTitle}>
+                {"Test titlte"}
+              </Typography>
+              <Typography sx={styles.customBoxDescription}>
+                This is a very long test description. This is a very long test
+                description. This is a very long test description.This is a very
+                long test description. This is a very long test description.
+                This is a very long test description. This is a very long test
+                description.This is a very long test description. This is a very
+                long test description. This is a very long test description.
+                This is a very long test description.This is a very long test
+                description.
+              </Typography>
 
-            <Button>Read more</Button>
+              <Box alignSelf="flex-end">
+                <Button variant="contained" color="secondary">
+                  Read more
+                </Button>
+              </Box>
+            </Stack>
           </Stack>
-        </Stack>
+        </article>
       </a>
     </Link>
   )
