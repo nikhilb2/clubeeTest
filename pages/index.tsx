@@ -4,17 +4,11 @@ import type { NextPage } from "next"
 import Head from "next/head"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import AnimatedClubeeLogo from "src/components/common/animatedClubeeLogo"
 import FloatingBee from "src/components/common/floatingBee"
 import NewsCard from "src/components/news/newsCard"
 
 const Home: NextPage = () => {
-  const [slide, setSlide] = useState(false)
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setSlide(true)
-    }, 500)
-    return () => clearTimeout(timeout)
-  }, [])
   return (
     <Stack>
       <Head>
@@ -24,42 +18,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Stack>
-          <Box mt={2} position="relative">
-            <Image
-              src="/img/clubWithoutBee.svg"
-              width={400}
-              height={120}
-              objectFit="contain"
-            />
-            <Box
-              sx={{
-                position: "absolute",
-                top: "30px",
-                left: "162px",
-                //transform: "translate(-50%, -50%)"
-              }}
-            >
-              <Slide in={slide} timeout={1000}>
-                <Stack>
-                  <FloatingBee />
-                </Stack>
-              </Slide>
-            </Box>
-            <Typography
-              variant="body2"
-              sx={{
-                fontWeight: 600,
-              }}
-              width={400}
-              mt={"-20px"}
-              alignSelf="center"
-              textAlign={"right"}
-            >
-              Sports news
-            </Typography>
-          </Box>
-        </Stack>
+        <Stack></Stack>
         <Grid container spacing={4} p={4}>
           <Grid item>
             <NewsCard random={1} />
