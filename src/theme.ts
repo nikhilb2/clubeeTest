@@ -30,14 +30,13 @@ export const colors = {
 const theme = createTheme({
   typography: {
     h1: {
-     fontSize: "40px"
+      fontSize: "40px",
     },
-
   },
   palette: {
     primary: {
-      main: "#382933",
-      contrastText: "#a4b494",
+      main: "#101f3e",
+      contrastText: "#101f3e",
       //      light: "#F2F8FF",
     },
     secondary: {
@@ -46,7 +45,7 @@ const theme = createTheme({
     },
     background: {
       paper: "#F2F8FF",
-      default: "#FFFFFF"
+      default: "#FFFFFF",
     },
     text: {
       primary: "rgba(0,0,0,.9)",
