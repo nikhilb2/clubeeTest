@@ -5,6 +5,7 @@ import theme from "../src/theme"
 import { CssBaseline, Stack } from "@mui/material"
 import AnimatedClubeeLogo from "src/components/common/animatedClubeeLogo"
 import { useRouter } from "next/router"
+import CreateNews from "src/components/common/createNewsButton"
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { asPath } = useRouter()
@@ -12,6 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       {asPath !== "/" && <AnimatedClubeeLogo />}
       <CssBaseline /> <Component {...pageProps} />
+      <CreateNews />
     </ThemeProvider>
   )
 }
