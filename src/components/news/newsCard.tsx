@@ -19,6 +19,7 @@ const styles: { [key: string]: SxProps } = {
     overflow: "hidden",
     // height: "375px",
     boxShadow: "0px 4px 10px 2px rgba(200, 200, 200, 0.25)",
+    backgroundColor: theme.palette.primary.contrastText,
     borderRadius: "2px",
     "&:hover": {
       "& .newsImage": {

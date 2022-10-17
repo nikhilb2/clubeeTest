@@ -2,6 +2,8 @@ import { Stack, Grid } from "@mui/material"
 
 import type { NextPage } from "next"
 import Head from "next/head"
+import Image from "next/image"
+
 import DecoratedTitle from "src/components/common/decaratedTitle"
 
 import LatestNews from "src/components/news/latestNews"
