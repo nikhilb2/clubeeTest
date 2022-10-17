@@ -12,9 +12,12 @@ const LatestNews = () => {
           width: {
             xs: "100%",
             md: "900px",
-            borderRadius: "10px",
-            overflow: "hidden",
           },
+          borderRadius: {
+            xs: 0,
+            md: "5px",
+          },
+          overflow: "hidden",
         }}
       >
         <Stack position="relative">

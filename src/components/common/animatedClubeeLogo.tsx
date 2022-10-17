@@ -21,13 +21,13 @@ const AnimatedClubeeLogo = (props: AnimatedClubeeLogoProps) => {
     if (slide) {
       const timeout = setTimeout(() => {
         setFadeIn(true)
-      }, 1200)
+      }, 600)
       return () => clearTimeout(timeout)
     }
   }, [slide])
   return (
     <Box mt={2} position="relative">
-      <Fade in={fadeIn} timeout={1000}>
+      <Fade in={fadeIn} timeout={500}>
         <Box>
           <Image
             src="/img/clubWithoutBee.svg"
@@ -45,13 +45,13 @@ const AnimatedClubeeLogo = (props: AnimatedClubeeLogoProps) => {
           //transform: "translate(-50%, -50%)"
         }}
       >
-        <Slide in={slide} timeout={1000}>
+        <Slide in={slide} timeout={500}>
           <Stack>
             <FloatingBee />
           </Stack>
         </Slide>
       </Box>
-      <Fade in={fadeIn} timeout={1000}>
+      <Fade in={fadeIn} timeout={500}>
         <Typography
           variant="body2"
           sx={{

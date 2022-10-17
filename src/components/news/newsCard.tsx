@@ -10,21 +10,16 @@ import { Box } from "@mui/system"
 const styles: { [key: string]: SxProps } = {
   container: {
     position: "relative",
-    width: "394px",
+    maxWidth: { xs: "100%", md: "400px" },
+    width: {
+      lg: "calc((100vw - 82px) / 4.3)",
+      xs: "100%",
+      md: "calc(100vw / 3.5)",
+    },
     overflow: "hidden",
     // height: "375px",
     boxShadow: "0px 4px 10px 2px rgba(200, 200, 200, 0.25)",
     borderRadius: "2px",
-
-    [theme.breakpoints.down("sm")]: {
-      width: "295px",
-      //   height: "363px",
-    },
-    [theme.breakpoints.down("sm")]: {
-      width: "100%",
-      // height: "353px",
-    },
-
     "&:hover": {
       "& .newsImage": {
         transform: "scale(1.2)",

@@ -6,6 +6,7 @@ import DecoratedTitle from "src/components/common/decaratedTitle"
 
 import LatestNews from "src/components/news/latestNews"
 import NewsCard from "src/components/news/newsCard"
+import theme from "src/theme"
 
 const Home: NextPage = () => {
   return (
@@ -17,27 +18,36 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Stack alignItems="center">
-          <DecoratedTitle title="Latest news" />
-        </Stack>
-        <LatestNews />
-        <Grid container spacing={4} p={4}>
-          <Grid item>
-            <NewsCard random={1} />
-          </Grid>
-          <Grid item>
-            <NewsCard random={2} />
-          </Grid>
-          <Grid item>
-            <NewsCard random={3} />
-          </Grid>
-          <Grid item>
-            <NewsCard random={4} />
-          </Grid>
-          <Grid item>
-            <NewsCard random={5} />
-          </Grid>
-        </Grid>
+        <section>
+          <Stack alignItems="center">
+            <DecoratedTitle title="Latest news" />
+          </Stack>
+          <LatestNews />
+        </section>
+        <section>
+          <Stack p={{ xs: 4, lg: theme.spacing(4, 0, 4, "40px") }}>
+            <Stack alignItems="center">
+              <DecoratedTitle title="Other news" />
+            </Stack>
+            <Grid container spacing={4}>
+              <Grid item>
+                <NewsCard random={1} />
+              </Grid>
+              <Grid item>
+                <NewsCard random={2} />
+              </Grid>
+              <Grid item>
+                <NewsCard random={3} />
+              </Grid>
+              <Grid item>
+                <NewsCard random={4} />
+              </Grid>
+              <Grid item>
+                <NewsCard random={5} />
+              </Grid>
+            </Grid>
+          </Stack>
+        </section>
       </main>
 
       <footer></footer>
