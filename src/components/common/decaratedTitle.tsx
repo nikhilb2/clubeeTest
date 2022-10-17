@@ -4,9 +4,9 @@ import { Typography } from "@mui/material"
 import theme from "src/theme"
 
 const Bar = styled(Box)({
-  height: "7px",
+  height: "3px",
   width: "100px",
-  backgroundColor: theme.palette.primary.main,
+  backgroundColor: theme.palette.secondary.main,
 })
 
 interface DecoratedTitleProps {
@@ -19,8 +19,8 @@ const DecoratedTitle = (props: DecoratedTitleProps) => {
     <Stack direction="row" spacing={1} alignItems="center">
       <Bar
         sx={{
-          borderTopLeftRadius: "50%",
-          borderBottomLeftRadius: "50%",
+          borderTopLeftRadius: "20px",
+          borderBottomLeftRadius: "20px",
         }}
       />
       <Typography textAlign="center" fontSize="20px" p={2} fontWeight={500}>
@@ -28,8 +28,8 @@ const DecoratedTitle = (props: DecoratedTitleProps) => {
       </Typography>
       <Bar
         sx={{
-          borderTopRightRadius: "50%",
-          borderBottomRightRadius: "50%",
+          borderTopRightRadius: "20px",
+          borderBottomRightRadius: "20px",
         }}
       />
     </Stack>

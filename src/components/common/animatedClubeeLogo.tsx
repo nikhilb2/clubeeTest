@@ -26,7 +26,7 @@ const AnimatedClubeeLogo = (props: AnimatedClubeeLogoProps) => {
     }
   }, [slide])
   return (
-    <Box mt={2} position="relative">
+    <Box mt={2} position="relative" width="200px" p={3}>
       <Fade in={fadeIn} timeout={500}>
         <Box>
           <Image
@@ -40,10 +40,11 @@ const AnimatedClubeeLogo = (props: AnimatedClubeeLogoProps) => {
       <Box
         sx={{
           position: "absolute",
-          top: "30px",
-          left: "162px",
+          top: "24px",
+          left: "82px",
           //transform: "translate(-50%, -50%)"
         }}
+        width="45px"
       >
         <Slide in={slide} timeout={500}>
           <Stack>
@@ -57,8 +58,8 @@ const AnimatedClubeeLogo = (props: AnimatedClubeeLogoProps) => {
           sx={{
             fontWeight: 600,
           }}
-          width={400}
-          mt={"-20px"}
+          width={200}
+          mt={"-14px"}
           alignSelf="center"
           textAlign={"right"}
         >

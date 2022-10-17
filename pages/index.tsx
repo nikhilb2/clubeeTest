@@ -21,9 +21,6 @@ const Home: NextPage = () => {
 
       <main>
         <section>
-          <Stack alignItems="center">
-            <DecoratedTitle title="Latest news" />
-          </Stack>
           <LatestNews />
         </section>
         <section>
