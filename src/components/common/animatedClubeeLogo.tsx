@@ -4,11 +4,7 @@ import Image from "next/image"
 import React, { useEffect, useState } from "react"
 import FloatingBee from "./floatingBee"
 
-interface AnimatedClubeeLogoProps {
-  start: boolean
-}
-
-const AnimatedClubeeLogo = (props: AnimatedClubeeLogoProps) => {
+const AnimatedClubeeLogo = () => {
   const [slide, setSlide] = useState(false)
   useEffect(() => {
     const timeout = setTimeout(() => {
