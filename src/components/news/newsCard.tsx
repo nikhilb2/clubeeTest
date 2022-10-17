@@ -105,8 +105,8 @@ const NewsCard = (props: { random: number }) => {
                 quality={100}
                 src={`https://loremflickr.com/500/400/sports?random=${props.random}`}
                 alt={"test"}
-                width="100%"
-                height="334px"
+                width="500"
+                height="400"
                 objectFit="cover"
               />
             </Stack>

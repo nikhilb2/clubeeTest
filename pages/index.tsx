@@ -1,11 +1,10 @@
-import { Collapse, Zoom, Stack, Typography, Slide, Grid } from "@mui/material"
-import { Box } from "@mui/system"
+import { Stack, Grid } from "@mui/material"
+
 import type { NextPage } from "next"
 import Head from "next/head"
-import Image from "next/image"
-import { useEffect, useState } from "react"
-import AnimatedClubeeLogo from "src/components/common/animatedClubeeLogo"
-import FloatingBee from "src/components/common/floatingBee"
+import DecoratedTitle from "src/components/common/decaratedTitle"
+
+import LatestNews from "src/components/news/latestNews"
 import NewsCard from "src/components/news/newsCard"
 
 const Home: NextPage = () => {
@@ -18,7 +17,10 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Stack></Stack>
+        <Stack alignItems="center">
+          <DecoratedTitle title="Latest news" />
+        </Stack>
+        <LatestNews />
         <Grid container spacing={4} p={4}>
           <Grid item>
             <NewsCard random={1} />

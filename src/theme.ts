@@ -32,6 +32,9 @@ const theme = createTheme({
     h1: {
       fontSize: "40px",
     },
+    body1: {
+      color: "#101f3e",
+    },
   },
   palette: {
     primary: {
