@@ -92,7 +92,7 @@ const styles: { [key: string]: SxProps } = {
 
 const NewsCard = (props: { random: number }) => {
   return (
-    <Link href={`/`} as={`/`}>
+    <Link href={`/news/test`} as={`/news/test`}>
       <a>
         <article>
           <Stack sx={styles.container}>
@@ -122,13 +122,9 @@ const NewsCard = (props: { random: number }) => {
               </Typography>
 
               <Box alignSelf="flex-end">
-                <Link href="/news/test">
-                  <a>
-                    <Button variant="contained" color="secondary">
-                      Read more
-                    </Button>
-                  </a>
-                </Link>
+                <Button variant="contained" color="secondary">
+                  Read more
+                </Button>
               </Box>
             </Stack>
           </Stack>
