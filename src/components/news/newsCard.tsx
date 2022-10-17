@@ -122,9 +122,13 @@ const NewsCard = (props: { random: number }) => {
               </Typography>
 
               <Box alignSelf="flex-end">
-                <Button variant="contained" color="secondary">
-                  Read more
-                </Button>
+                <Link href="/news/test">
+                  <a>
+                    <Button variant="contained" color="secondary">
+                      Read more
+                    </Button>
+                  </a>
+                </Link>
               </Box>
             </Stack>
           </Stack>

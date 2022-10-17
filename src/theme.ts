@@ -1,4 +1,4 @@
-import { createStyles, createTheme } from "@mui/material/styles"
+import { createStyles, createTheme, SxProps } from "@mui/material/styles"
 import { Shadows } from "@mui/material/styles/shadows"
 
 export const fonts = {
@@ -75,7 +75,7 @@ const theme = createTheme({
   shadows: new Array(25).fill("none") as Shadows,
 })
 
-export const moreStyles = createStyles({
+export const moreStyles: { [key: string]: SxProps } = {
   showScroll: {
     "::-webkit-scrollbar": {
       WebkitAppearance: "none",
@@ -116,16 +116,17 @@ export const moreStyles = createStyles({
     },
   },
   link: {
-    fontWeight: 600,
+    fontWeight: 500,
     color: theme.palette.primary.main,
-    textDecoration: "underline",
+
     "&:hover": {
       cursor: "pointer",
+      textDecoration: "underline",
     },
   },
   shadow: {
     boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 4px",
   },
-})
+}
 
 export default theme
