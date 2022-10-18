@@ -1,23 +1,17 @@
-import {
-  Fab,
-  Box,
-  Typography,
-  Stack,
-  FormControlLabel,
-  TextField,
-  Button,
-  Collapse,
-} from "@mui/material"
+import { Fab, Box, Typography, Stack, Button, Collapse } from "@mui/material"
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import AddIcon from "@mui/icons-material/Add"
 import SimpleModal from "../modals/simpleModal"
 import Image from "next/image"
+import SimpleInput from "../inputs/simpleInput"
 const CreateNews = () => {
   const [image, setImage] = useState<number | undefined>()
   const [imageError, setImageError] = useState("")
   const [showCreateNews, setShowCreateNews] = useState(false)
   const [title, setTitle] = useState("")
   const [titleError, setTitleError] = useState("")
+  const [author, setAuthor] = useState("")
+  const [authorError, setauthorError] = useState("")
   const [description, setDescription] = useState("")
   const [descriptionError, setDescriptionError] = useState("")
 
@@ -74,33 +68,31 @@ const CreateNews = () => {
         <Stack width={700}>
           <Typography variant="h5">Create news</Typography>
           <Typography variant="caption">Fill in the details below.</Typography>
-          <Stack mt={2} spacing={3}>
-            <Stack>
-              <Typography>Title</Typography>
-              <TextField
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Enter the news title here."
-              />
-              <Collapse in={!!titleError}>
-                <Typography color="error" variant="caption">
-                  {titleError}
-                </Typography>
-              </Collapse>
-            </Stack>
-            <Stack>
-              <Typography>Description</Typography>
-              <TextField
-                onChange={(e) => setDescription(e.target.value)}
-                maxRows={5}
-                multiline={true}
-                placeholder="Enter a long description here."
-              />
-              <Collapse in={!!descriptionError}>
-                <Typography color="error" variant="caption">
-                  {descriptionError}
-                </Typography>
-              </Collapse>
-            </Stack>
+          <Stack mt={2} spacing={2}>
+            <SimpleInput
+              label="Title"
+              value={title}
+              onChange={(text) => setTitle(text)}
+              placeholder="Enter the news title here."
+              error={titleError}
+            />
+
+            <SimpleInput
+              label="Author name"
+              value={author}
+              onChange={(text) => setAuthor(text)}
+              placeholder="Enter the news title here."
+              error={authorError}
+            />
+
+            <SimpleInput
+              label="Description"
+              error={descriptionError}
+              onChange={(text) => setDescription(text)}
+              multiline={true}
+              placeholder="Enter a long description here."
+            />
+
             <Stack direction="row" alignItems={"center"} spacing={2}>
               <Button
                 variant="contained"
@@ -109,7 +101,7 @@ const CreateNews = () => {
                 Click here
               </Button>
               <Typography>to select random image</Typography>
-              <Collapse in={!!titleError}>
+              <Collapse in={!!imageError}>
                 <Typography color="error" variant="caption">
                   {imageError}
                 </Typography>

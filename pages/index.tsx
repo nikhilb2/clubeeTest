@@ -3,6 +3,7 @@ import { Stack } from "@mui/system"
 import { useRouter } from "next/router"
 import React, { useCallback, useEffect, useState } from "react"
 import FloatingBee from "src/components/common/floatingBee"
+import SimpleInput from "src/components/inputs/simpleInput"
 
 const ChatPoppup = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -28,7 +29,7 @@ const WelcomeBee = () => {
   }, [])
 
   useEffect(() => {
-    if (growMessage < 4) {
+    if (growMessage < 3) {
       const timeout = setTimeout(() => {
         setGrowMessage(growMessage + 1)
       }, 1500)
@@ -74,11 +75,26 @@ const WelcomeBee = () => {
                 <Collapse in={growMessage > 1}>
                   <ChatPoppup>
                     <Typography color="primary.contrastText">
-                      Lets enter the world of Sports.
+                      What can i call you?
                     </Typography>
                   </ChatPoppup>
                 </Collapse>
                 <Collapse in={growMessage > 2}>
+                  <Stack direction="row">
+                    <SimpleInput
+                      focus={growMessage > 1}
+                      placeholder="Enter your name here"
+                    />
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      onClick={() => setGrowMessage(4)}
+                    >
+                      Ok
+                    </Button>
+                  </Stack>
+                </Collapse>
+                <Collapse in={growMessage > 3}>
                   <ChatPoppup>
                     <Typography color="primary.contrastText">
                       Just follow me.
