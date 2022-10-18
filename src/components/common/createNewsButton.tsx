@@ -4,13 +4,19 @@ import AddIcon from "@mui/icons-material/Add"
 import SimpleModal from "../modals/simpleModal"
 import Image from "next/image"
 import SimpleInput from "../inputs/simpleInput"
-const CreateNews = () => {
+
+interface CreateNewsProps {
+  userName: string
+}
+
+const CreateNews = (props: CreateNewsProps) => {
+  const { userName } = props
   const [image, setImage] = useState<number | undefined>()
   const [imageError, setImageError] = useState("")
   const [showCreateNews, setShowCreateNews] = useState(false)
   const [title, setTitle] = useState("")
   const [titleError, setTitleError] = useState("")
-  const [author, setAuthor] = useState("")
+  const [author, setAuthor] = useState(userName)
   const [authorError, setauthorError] = useState("")
   const [description, setDescription] = useState("")
   const [descriptionError, setDescriptionError] = useState("")
@@ -39,7 +45,10 @@ const CreateNews = () => {
     if (image) {
       setImageError("")
     }
-  }, [image, title, description])
+    if (author.length < 3) {
+      setauthorError("Author name should be atleast 3 characters")
+    }
+  }, [image, title, description, author])
 
   return (
     <>
@@ -79,10 +88,9 @@ const CreateNews = () => {
 
             <SimpleInput
               label="Author name"
+              error={authorError}
               value={author}
               onChange={(text) => setAuthor(text)}
-              placeholder="Enter the news title here."
-              error={authorError}
             />
 
             <SimpleInput
