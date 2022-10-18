@@ -4,6 +4,9 @@ import AddIcon from "@mui/icons-material/Add"
 import SimpleModal from "../modals/simpleModal"
 import Image from "next/image"
 import SimpleInput from "../inputs/simpleInput"
+import { useMutation } from "react-query"
+import { PostNewsParams } from "src/model"
+import { postNews } from "src/queries/news"
 
 interface CreateNewsProps {
   userName: string
@@ -22,17 +25,28 @@ const CreateNews = (props: CreateNewsProps) => {
   const [descriptionError, setDescriptionError] = useState("")
 
   const validateForm = useCallback(() => {
+    let status = true
     if (title.length < 5) {
       setTitleError("Title should be atleast 5 characters long")
+      status = false
     }
     if (description.length < 200) {
-      setDescriptionError("Description should be atleast 200 characters")
+      setDescriptionError("Description should be atleast 200 characters long.")
+      status = false
     }
 
     if (!image) {
       setImageError("Please select an image")
+      status = false
     }
-  }, [image, title, description])
+
+    if (author.length < 3) {
+      setImageError("Author should be atleast 3 characters long. ")
+      status = false
+    }
+
+    return status
+  }, [image, title, description, author])
 
   useEffect(() => {
     if (title.length >= 5) {
@@ -45,10 +59,14 @@ const CreateNews = (props: CreateNewsProps) => {
     if (image) {
       setImageError("")
     }
-    if (author.length < 3) {
-      setauthorError("Author name should be atleast 3 characters")
+    if (author.length >= 3) {
+      setauthorError("")
     }
   }, [image, title, description, author])
+
+  const { mutate: mutatePostNews } = useMutation((params: PostNewsParams) => {
+    return postNews(params)
+  })
 
   return (
     <>
@@ -133,7 +151,14 @@ const CreateNews = (props: CreateNewsProps) => {
             <Button
               variant="contained"
               onClick={() => {
-                validateForm()
+                if (validateForm()) {
+                  mutatePostNews({
+                    title,
+                    description,
+                    image: `https://loremflickr.com/1000/500/sports?random=${image}`,
+                    author,
+                  })
+                }
               }}
             >
               Accept

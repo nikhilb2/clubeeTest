@@ -19,7 +19,7 @@ type FourHundredFive = {
 const readFile = async () => {
   const jsonDirectory = path.join(process.cwd(), "/src/api/")
   const file = await fs.readFile(jsonDirectory + "news.json", "utf8")
-  return JSON.parse(file) as NewsJson
+  return JSON.parse(file) as News[]
 }
 
 const writeFile = async (body: {
@@ -40,6 +40,10 @@ const writeFile = async (body: {
     author,
     date: new Date(),
   }
+  if (data.length > 4) {
+    data.pop()
+  }
+  data.unshift(news)
   data[id] = news
   const jsonDirectory = path.join(process.cwd(), "/src/api/")
   await fs.writeFile(
@@ -57,7 +61,7 @@ export default async function handler(
   if (req.method === "GET") {
     const data = await readFile()
 
-    res.status(200).json({ data: Object.values(data) })
+    res.status(200).json({ data })
     return
   }
   if (req.method === "POST") {

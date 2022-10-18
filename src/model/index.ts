@@ -10,3 +10,10 @@ export interface News {
 export interface NewsJson {
   [key: string]: News
 }
+
+export interface PostNewsParams {
+  title: string
+  description: string
+  image: string
+  author: string
+}
