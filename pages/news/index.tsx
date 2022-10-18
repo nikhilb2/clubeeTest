@@ -10,7 +10,7 @@ import LatestNews from "src/components/news/latestNews"
 import NewsCard from "src/components/news/newsCard"
 import theme from "src/theme"
 
-const Home: NextPage = () => {
+const Home: NextPage = (props) => {
   return (
     <Stack>
       <Head>

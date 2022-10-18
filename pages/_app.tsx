@@ -29,7 +29,7 @@ const Comp = (props: AppProps) => {
     <ThemeProvider theme={theme}>
       {asPath !== "/" && <AnimatedClubeeLogo />}
       <CssBaseline />
-      <Component {...pageProps} />
+      <Component {...pageProps} userName={userName} />
       <CreateNews />
     </ThemeProvider>
   )
