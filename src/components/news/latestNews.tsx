@@ -7,6 +7,7 @@ import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 import DecoratedTitle from "../common/decaratedTitle"
 import { News } from "src/model"
 import Link from "next/link"
+import { formatDate } from "src/lib"
 
 const styles: { [key: string]: SxProps } = {
   customBoxDescription: {
@@ -127,7 +128,7 @@ const LatestNews = (props: NewsCardProps) => {
           <Typography variant="caption">
             Date:{" "}
             <Box component="span" sx={{ fontWeight: 500 }}>
-              {news.date}
+              {formatDate(news.date)}
             </Box>
           </Typography>
         </Stack>

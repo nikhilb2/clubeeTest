@@ -1,3 +1,5 @@
+import moment from "moment"
+
 export const apiBodyValidator = (body: any) => {
   const { title, author, description, image } = body
   let error = ""
@@ -26,3 +28,7 @@ export const slugify = (str: string) =>
     .replace(/[^\w\s-]/g, "")
     .replace(/[\s_-]+/g, "-")
     .replace(/^-+|-+$/g, "")
+
+export const formatDate = (date: string) => {
+  return moment(date).format("D MMM YYYY, HH:mm")
+}
