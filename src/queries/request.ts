@@ -19,7 +19,7 @@ export type RequestFail = { success: false; message: string }
 export type RequestReturnParam<T> = RequestSuccess<T> | RequestFail
 export type APITYPE = "API" | "BLOG"
 
-const fetchWithTimeout = async (resource: string, options = {}) => {
+/* const fetchWithTimeout = async (resource: string, options = {}) => {
   const timeout = 15000
 
   const controller = new AbortController()
@@ -30,7 +30,7 @@ const fetchWithTimeout = async (resource: string, options = {}) => {
   })
   clearTimeout(id)
   return response
-}
+} */
 
 const request = async (
   url: string,
@@ -70,7 +70,7 @@ const request = async (
     return conf.API_ROOT
   }
   try {
-    const response = await fetchWithTimeout(
+    const response = await fetch(
       `${getApiUrl()}${decoratedUrl}`,
       decoratedOptions as RequestInit
     )
