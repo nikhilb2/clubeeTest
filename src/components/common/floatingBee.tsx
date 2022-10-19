@@ -1,4 +1,4 @@
-import { Stack, styled } from "@mui/system"
+import { Stack } from "@mui/system"
 import Image from "next/image"
 import { useMemo } from "react"
 

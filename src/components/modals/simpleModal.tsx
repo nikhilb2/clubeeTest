@@ -2,7 +2,7 @@ import * as React from "react"
 import Box from "@mui/material/Box"
 
 import Modal from "@mui/material/Modal"
-import { IconButton, Stack } from "@mui/material"
+import { IconButton } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 
 const style = {
