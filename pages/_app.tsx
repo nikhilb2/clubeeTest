@@ -5,11 +5,19 @@ import theme from "../src/theme"
 import { CssBaseline, Stack } from "@mui/material"
 import AnimatedClubeeLogo from "src/components/common/animatedClubeeLogo"
 import { useRouter } from "next/router"
-import CreateNews from "src/components/common/createNewsButton"
 import { QueryClientProvider, useQuery } from "react-query"
 import { queryClient } from "src/queries"
 import cacheKeys from "src/queries/cacheKeys"
 import { getUserNameFromLocalStorage } from "src/queries/auth"
+import dynamic from "next/dynamic"
+import { CreateNewsProps } from "src/components/common/createNewsButton"
+
+const CreateNews = dynamic(
+  () => import("src/components/common/createNewsButton"),
+  {
+    ssr: false,
+  }
+) as React.FunctionComponent<CreateNewsProps>
 
 const Comp = (props: AppProps) => {
   const { Component, pageProps } = props
@@ -23,7 +31,7 @@ const Comp = (props: AppProps) => {
       {asPath !== "/" && <AnimatedClubeeLogo />}
       <CssBaseline />
       <Component {...pageProps} userName={userName} />
-      {!!userName && <CreateNews userName={userName} />}
+      <CreateNews userName={userName || ""} />
     </ThemeProvider>
   )
 }

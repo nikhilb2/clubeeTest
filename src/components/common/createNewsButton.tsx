@@ -20,7 +20,7 @@ import * as animation from "src/lottie/successful.json"
 import { queryClient } from "src/queries"
 import cacheKeys from "src/queries/cacheKeys"
 
-interface CreateNewsProps {
+export interface CreateNewsProps {
   userName: string
 }
 
