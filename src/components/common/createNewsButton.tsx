@@ -1,4 +1,12 @@
-import { Fab, Box, Typography, Stack, Button, Collapse } from "@mui/material"
+import {
+  Fab,
+  Box,
+  Typography,
+  Stack,
+  Button,
+  Collapse,
+  CircularProgress,
+} from "@mui/material"
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import AddIcon from "@mui/icons-material/Add"
 import SimpleModal from "../modals/simpleModal"
@@ -9,6 +17,8 @@ import { PostNewsParams } from "src/model"
 import { postNews } from "src/queries/news"
 import Lottie, { LottieRef, LottieRefCurrentProps } from "lottie-react"
 import * as animation from "src/lottie/successful.json"
+import { queryClient } from "src/queries"
+import cacheKeys from "src/queries/cacheKeys"
 
 interface CreateNewsProps {
   userName: string
@@ -70,6 +80,7 @@ const CreateNews = (props: CreateNewsProps) => {
     mutate: mutatePostNews,
     isSuccess,
     reset,
+    isLoading,
   } = useMutation(
     (params: PostNewsParams) => {
       return postNews(params)
@@ -79,6 +90,7 @@ const CreateNews = (props: CreateNewsProps) => {
         setTimeout(() => {
           animationRef.current?.play()
         }, 500)
+        queryClient.invalidateQueries(cacheKeys.homePageNews())
       },
     }
   )
@@ -177,29 +189,35 @@ const CreateNews = (props: CreateNewsProps) => {
                 </Stack>
               </Collapse>
             </Stack>
-            <Stack direction="row" spacing={2} justifyContent="center" mt={3}>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  if (validateForm()) {
-                    mutatePostNews({
-                      title,
-                      description,
-                      image: `https://loremflickr.com/1000/500/sports?random=${image}`,
-                      author,
-                    })
-                  }
-                }}
-              >
-                Accept
-              </Button>
-              <Button
-                variant="outlined"
-                onClick={() => setShowCreateNews(false)}
-              >
-                Cancel
-              </Button>
-            </Stack>
+            {isLoading ? (
+              <Stack alignItems={"center"} height="50px">
+                <CircularProgress />
+              </Stack>
+            ) : (
+              <Stack direction="row" spacing={2} justifyContent="center" mt={3}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    if (validateForm()) {
+                      mutatePostNews({
+                        title,
+                        description,
+                        image: `https://loremflickr.com/1000/500/sports?random=${image}`,
+                        author,
+                      })
+                    }
+                  }}
+                >
+                  Accept
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() => setShowCreateNews(false)}
+                >
+                  Cancel
+                </Button>
+              </Stack>
+            )}
           </Collapse>
           <Collapse in={isSuccess}>
             <Stack alignItems={"center"} spacing={3}>

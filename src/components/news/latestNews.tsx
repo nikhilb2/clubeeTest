@@ -3,9 +3,10 @@ import { Stack } from "@mui/system"
 import Image from "next/image"
 import React from "react"
 import theme from "src/theme"
-import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline"
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
 import DecoratedTitle from "../common/decaratedTitle"
 import { News } from "src/model"
+import Link from "next/link"
 
 const styles: { [key: string]: SxProps } = {
   customBoxDescription: {
@@ -18,6 +19,24 @@ const styles: { [key: string]: SxProps } = {
     wordBreak: "break-word",
     overflow: "hidden",
     textOverflow: "ellipsis",
+  },
+  title: {
+    display: "-webkit-box",
+    boxOrient: "vertical",
+    lineClamp: 2,
+    WebkitBoxOrient: "vertical",
+    WebkitLineClamp: 2,
+
+    wordBreak: "break-word",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    //  color: theme.palette.secondary.main,
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "16px",
+    },
+    fontSize: "20px",
+    color: theme.palette.primary.contrastText,
+    fontWeight: 500,
   },
 }
 interface NewsCardProps {
@@ -51,50 +70,46 @@ const LatestNews = (props: NewsCardProps) => {
           }}
         >
           <Stack position="relative">
-            <Stack>
-              <Image
-                src={news.image}
-                alt={news.title}
-                width="1000px"
-                height="500px"
-                priority
-              />
-              <Stack
-                sx={{
-                  position: "absolute",
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  backgroundImage:
-                    "linear-gradient(transparent, rgba(0,0,0,.5))",
-                  padding: 3,
-                }}
-              >
-                <Divider color="#ffffff" />
-                <Stack direction="row" alignItems={"center"}>
-                  <Typography
-                    flex={9}
-                    variant="h2"
+            <Link href={`/news/${news.id}`}>
+              <a>
+                <Stack>
+                  <Image
+                    src={news.image}
+                    alt={news.title}
+                    width="1000px"
+                    height="500px"
+                    priority
+                  />
+                  <Stack
                     sx={{
-                      color: theme.palette.primary.contrastText,
-                      fontWeight: 500,
-                      fontSize: "20px",
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      backgroundImage:
+                        "linear-gradient(transparent, rgba(0,0,0,.5))",
+                      padding: 3,
                     }}
                   >
-                    {news.title}
-                  </Typography>
+                    <Divider color="#ffffff" />
+                    <Stack direction="row" alignItems={"center"}>
+                      <Typography flex={9} variant="h2" sx={styles.title}>
+                        {news.title}
+                      </Typography>
 
-                  <Stack flex={1}>
-                    <PlayCircleOutlineIcon
-                      sx={{
-                        fontSize: 60,
-                        color: theme.palette.primary.contrastText,
-                      }}
-                    />
+                      <Stack flex={1}>
+                        <ArrowForwardIcon
+                          sx={{
+                            fontSize: 40,
+                            color: theme.palette.primary.contrastText,
+                          }}
+                        />
+                      </Stack>
+                    </Stack>
                   </Stack>
                 </Stack>
-              </Stack>
-            </Stack>
+              </a>
+            </Link>
           </Stack>
         </Stack>
       </Stack>
@@ -119,9 +134,13 @@ const LatestNews = (props: NewsCardProps) => {
         <Typography sx={styles.customBoxDescription}>
           {news.description}
         </Typography>
-        <Stack alignItems={"flex-end"}>
-          <Button variant="contained">Read more</Button>
-        </Stack>
+        <Link href={`/news/${news.id}`}>
+          <a>
+            <Stack alignItems={"flex-end"}>
+              <Button variant="contained">Read more</Button>
+            </Stack>
+          </a>
+        </Link>
       </Stack>
     </Stack>
   )
