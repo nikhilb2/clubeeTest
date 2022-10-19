@@ -133,7 +133,7 @@ const CreateNews = (props: CreateNewsProps) => {
       >
         <Stack
           width={{ xs: "85vw", sm: 700 }}
-          height={{ xs: "93vh", sm: undefined }}
+          height={{ xs: "93vh", sm: "100%" }}
         >
           <Collapse in={!isSuccess}>
             <Typography variant="h5">Create news</Typography>
