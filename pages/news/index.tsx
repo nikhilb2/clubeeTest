@@ -75,7 +75,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: {
       news,
-      latestNews,
+      latestNews: latestNews || null,
     },
   }
 }

@@ -53,7 +53,7 @@ const CreateNews = (props: CreateNewsProps) => {
     }
 
     if (author.length < 3) {
-      setImageError("Author should be atleast 3 characters long. ")
+      setauthorError("Author should be atleast 3 characters long. ")
       status = false
     }
 
