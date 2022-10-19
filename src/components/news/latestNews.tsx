@@ -5,6 +5,7 @@ import React from "react"
 import theme from "src/theme"
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline"
 import DecoratedTitle from "../common/decaratedTitle"
+import { News } from "src/model"
 
 const styles: { [key: string]: SxProps } = {
   customBoxDescription: {
@@ -19,8 +20,12 @@ const styles: { [key: string]: SxProps } = {
     textOverflow: "ellipsis",
   },
 }
+interface NewsCardProps {
+  news: News
+}
 
-const LatestNews = () => {
+const LatestNews = (props: NewsCardProps) => {
+  const { news } = props
   return (
     <Stack
       direction={{ xs: "column", md: "row" }}
@@ -48,7 +53,8 @@ const LatestNews = () => {
           <Stack position="relative">
             <Stack>
               <Image
-                src="https://loremflickr.com/1000/500/sports"
+                src={news.image}
+                alt={news.title}
                 width="1000px"
                 height="500px"
                 priority
@@ -75,9 +81,7 @@ const LatestNews = () => {
                       fontSize: "20px",
                     }}
                   >
-                    Herchel walker leads Hawks celebration as Bulldogs beat
-                    Spartans Herchel walker leads Hawks celebration as Bulldogs
-                    beat Spartans{" "}
+                    {news.title}
                   </Typography>
 
                   <Stack flex={1}>
@@ -102,25 +106,18 @@ const LatestNews = () => {
           <Typography variant="caption">
             Author:{" "}
             <Box component="span" sx={{ fontWeight: 500 }}>
-              Nikhil Bhatia
+              {news.author}
             </Box>
           </Typography>
           <Typography variant="caption">
             Date:{" "}
             <Box component="span" sx={{ fontWeight: 500 }}>
-              17th October 2022
+              {news.date}
             </Box>
           </Typography>
         </Stack>
         <Typography sx={styles.customBoxDescription}>
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans{" "}
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans{" "}
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans{" "}
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans
-          Herchel walker leads Hawks celebration as Bulldogs beat Spartans{" "}
+          {news.description}
         </Typography>
         <Stack alignItems={"flex-end"}>
           <Button variant="contained">Read more</Button>

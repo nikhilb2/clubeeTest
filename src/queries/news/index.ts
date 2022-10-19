@@ -11,3 +11,14 @@ export const postNews = async (params: PostNewsParams) => {
     cause: new Error(result.message),
   })
 }
+
+export const getNews = async () => {
+  const result = await request("news", "GET", null)
+  if (result.success) {
+    return result.data as News[]
+  }
+
+  throw new Error(result.error, {
+    cause: new Error(result.message),
+  })
+}

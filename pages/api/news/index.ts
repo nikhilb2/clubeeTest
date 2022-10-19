@@ -5,13 +5,9 @@ import type { NextApiRequest, NextApiResponse } from "next"
 import { apiBodyValidator, slugify } from "src/lib"
 import { News, NewsJson } from "src/model"
 
-type GetNews = {
-  data: News[]
-}
+type GetNews = News[]
 
-type PostNews = {
-  data: News
-}
+type PostNews = News
 
 type FourHundredFive = {
   error?: string
@@ -38,7 +34,7 @@ const writeFile = async (body: {
     description,
     image,
     author,
-    date: new Date(),
+    date: String(new Date()),
   }
   if (data.length > 4) {
     data.pop()
@@ -61,7 +57,7 @@ export default async function handler(
   if (req.method === "GET") {
     const data = await readFile()
 
-    res.status(200).json({ data })
+    res.status(200).json(data)
     return
   }
   if (req.method === "POST") {
@@ -79,7 +75,7 @@ export default async function handler(
       author,
     })
 
-    res.status(200).send({ data: news })
+    res.status(200).send(news)
 
     return
   }

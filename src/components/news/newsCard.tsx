@@ -6,6 +6,7 @@ import theme from "src/theme"
 import Link from "next/link"
 import Image from "next/image"
 import { Box } from "@mui/system"
+import { News } from "src/model"
 
 const styles: { [key: string]: SxProps } = {
   container: {
@@ -90,7 +91,12 @@ const styles: { [key: string]: SxProps } = {
   },
 }
 
-const NewsCard = (props: { random: number }) => {
+interface NewsCardProps {
+  news: News
+}
+
+const NewsCard = (props: NewsCardProps) => {
+  const { news } = props
   return (
     <Link href={`/news/test`} as={`/news/test`}>
       <a>
@@ -99,8 +105,8 @@ const NewsCard = (props: { random: number }) => {
             <Stack sx={styles.image} className="newsImage">
               <Image
                 quality={100}
-                src={`https://loremflickr.com/500/400/sports?random=${props.random}`}
-                alt={"test"}
+                src={news.image}
+                alt={news.title}
                 width="500"
                 height="400"
                 objectFit="cover"
@@ -108,17 +114,10 @@ const NewsCard = (props: { random: number }) => {
             </Stack>
             <Stack padding={theme.spacing(3)} spacing={2}>
               <Typography variant="h5" sx={styles.customBoxTitle}>
-                {"Test titlte"}
+                {news.title}
               </Typography>
               <Typography sx={styles.customBoxDescription}>
-                This is a very long test description. This is a very long test
-                description. This is a very long test description.This is a very
-                long test description. This is a very long test description.
-                This is a very long test description. This is a very long test
-                description.This is a very long test description. This is a very
-                long test description. This is a very long test description.
-                This is a very long test description.This is a very long test
-                description.
+                {news.description}
               </Typography>
 
               <Box alignSelf="flex-end">

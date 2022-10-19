@@ -1,6 +1,6 @@
 import { Stack, Grid } from "@mui/material"
 
-import type { NextPage } from "next"
+import type { GetServerSidePropsContext, NextPage } from "next"
 import Head from "next/head"
 import Image from "next/image"
 
@@ -8,9 +8,18 @@ import DecoratedTitle from "src/components/common/decaratedTitle"
 
 import LatestNews from "src/components/news/latestNews"
 import NewsCard from "src/components/news/newsCard"
+import { News } from "src/model"
+import { getNewsFromCacheAndSync } from "src/queries/serverSideCache"
 import theme from "src/theme"
 
-const Home: NextPage = (props) => {
+interface HomeProps {
+  news: News[]
+  latestNews?: News
+}
+
+const Home: NextPage<HomeProps> = (props) => {
+  const { news, latestNews } = props
+
   return (
     <Stack>
       <Head>
@@ -20,30 +29,18 @@ const Home: NextPage = (props) => {
       </Head>
 
       <main>
-        <section>
-          <LatestNews />
-        </section>
+        <section>{latestNews && <LatestNews news={latestNews} />}</section>
         <section>
           <Stack p={{ xs: 4, lg: theme.spacing(4, 0, 4, "40px") }}>
             <Stack alignItems="center">
               <DecoratedTitle title="Other news" />
             </Stack>
             <Grid container spacing={4}>
-              <Grid item>
-                <NewsCard random={1} />
-              </Grid>
-              <Grid item>
-                <NewsCard random={2} />
-              </Grid>
-              <Grid item>
-                <NewsCard random={3} />
-              </Grid>
-              <Grid item>
-                <NewsCard random={4} />
-              </Grid>
-              <Grid item>
-                <NewsCard random={5} />
-              </Grid>
+              {news.map((item) => (
+                <Grid item key={item.id}>
+                  <NewsCard news={item} />
+                </Grid>
+              ))}
             </Grid>
           </Stack>
         </section>
@@ -52,6 +49,17 @@ const Home: NextPage = (props) => {
       <footer></footer>
     </Stack>
   )
+}
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const news: News[] = await getNewsFromCacheAndSync()
+  const latestNews = news.shift()
+  return {
+    props: {
+      news,
+      latestNews,
+    },
+  }
 }
 
 export default Home
