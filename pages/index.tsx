@@ -11,11 +11,9 @@ import { NextPage } from "next"
 import { useRouter } from "next/router"
 import React, { useCallback, useEffect, useState } from "react"
 import FloatingBee from "src/components/common/floatingBee"
+import HeaderMeta from "src/components/common/header"
 import SimpleInput from "src/components/inputs/simpleInput"
-import {
-  getUserNameFromLocalStorage,
-  setUserNameInCacheAndLocalStorage,
-} from "src/queries/auth"
+import { setUserNameInCacheAndLocalStorage } from "src/queries/auth"
 
 const ChatPoppup = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.primary.main,
@@ -91,98 +89,64 @@ const WelcomeBee: NextPage<WelcomeBeeProps> = (props) => {
     audio.play()
   }, [name, router])
   return (
-    <Stack
-      direction="row"
-      sx={{
-        height: "100vh",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <Slide in={slide}>
-        <Stack spacing={2}>
-          {!userName && (
-            <Collapse in={growMessage > 1 && !name}>
-              <Stack
-                direction="row"
-                justifyContent={"flex-end"}
-                marginRight="100px"
-              >
-                <SimpleInput
-                  value={tempName}
-                  onChange={(text) => setTempName(text)}
-                  placeholder="Enter your name here"
-                />
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={() => {
-                    if (!tempName) {
-                      setNameError([
-                        "You dont have a name? Thats wierd.",
-                        ...nameError,
-                      ])
-                      return
-                    }
-                    if (tempName.length < 3) {
-                      setNameError([
-                        "Its hard for me to remember so short name, can you be more specific.",
-                        ...nameError,
-                      ])
-                      return
-                    }
-                    setName(tempName)
-                    setKeepcounting(true)
-                  }}
+    <>
+      <HeaderMeta />
+      <Stack
+        direction="row"
+        sx={{
+          height: "100vh",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Slide in={slide}>
+          <Stack spacing={2}>
+            {!userName && (
+              <Collapse in={growMessage > 1 && !name}>
+                <Stack
+                  direction="row"
+                  justifyContent={"flex-end"}
+                  marginRight="100px"
                 >
-                  Ok
-                </Button>
-              </Stack>
-            </Collapse>
-          )}
-          <Stack direction="row">
-            <Stack>
-              <Stack height="300px" width="300px" overflow="scroll">
-                {!!userName ? (
-                  <Collapse in={showChat}>
-                    <Stack spacing={2}>
-                      <Collapse in={growMessage > 3}>
-                        <Button
-                          onClick={navigate}
-                          variant="contained"
-                          color="secondary"
-                        >
-                          Click here to Follow the bee
-                        </Button>
-                      </Collapse>
-                      <Collapse in={growMessage > 2}>
-                        <ChatPoppup>
-                          <Typography color="primary.contrastText">
-                            Follow me.
-                          </Typography>
-                        </ChatPoppup>
-                      </Collapse>
-                      <Collapse in={growMessage > 1}>
-                        <ChatPoppup>
-                          <Typography color="primary.contrastText">
-                            Let explore the world of sports.
-                          </Typography>
-                        </ChatPoppup>
-                      </Collapse>
-                      <Collapse in={growMessage > 0}>
-                        <ChatPoppup>
-                          <Typography color="primary.contrastText">
-                            Welcome back {userName}!
-                          </Typography>
-                        </ChatPoppup>
-                      </Collapse>
-                    </Stack>
-                  </Collapse>
-                ) : (
-                  <Collapse in={showChat}>
-                    <Stack spacing={2}>
-                      <Collapse in={growMessage > 5}>
-                        <Stack>
+                  <SimpleInput
+                    value={tempName}
+                    onChange={(text) => setTempName(text)}
+                    placeholder="Enter your name here"
+                  />
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                      if (!tempName) {
+                        setNameError([
+                          "You dont have a name? Thats wierd.",
+                          ...nameError,
+                        ])
+                        return
+                      }
+                      if (tempName.length < 3) {
+                        setNameError([
+                          "Its hard for me to remember so short name, can you be more specific.",
+                          ...nameError,
+                        ])
+                        return
+                      }
+                      setName(tempName)
+                      setKeepcounting(true)
+                    }}
+                  >
+                    Ok
+                  </Button>
+                </Stack>
+              </Collapse>
+            )}
+            <Stack direction="row">
+              <Stack>
+                <Stack height="300px" width="300px" overflow="scroll">
+                  {!!userName ? (
+                    <Collapse in={showChat}>
+                      <Stack spacing={2}>
+                        <Collapse in={growMessage > 3}>
                           <Button
                             onClick={navigate}
                             variant="contained"
@@ -190,59 +154,96 @@ const WelcomeBee: NextPage<WelcomeBeeProps> = (props) => {
                           >
                             Click here to Follow the bee
                           </Button>
-                        </Stack>
-                      </Collapse>
-                      <Collapse in={growMessage > 4}>
-                        <ChatPoppup>
-                          <Typography color="primary.contrastText">
-                            Just follow me.
-                          </Typography>
-                        </ChatPoppup>
-                      </Collapse>
-                      <Collapse in={growMessage > 3}>
-                        <ChatPoppup>
-                          <Typography color="primary.contrastText">
-                            Very nice name, Nice to meet you {name}!
-                          </Typography>
-                        </ChatPoppup>
-                      </Collapse>
-                      {nameError.map((item, i) => (
-                        <Collapse in={!!item} key={`${item}-${i}`}>
+                        </Collapse>
+                        <Collapse in={growMessage > 2}>
                           <ChatPoppup>
                             <Typography color="primary.contrastText">
-                              {item}
+                              Follow me.
                             </Typography>
                           </ChatPoppup>
                         </Collapse>
-                      ))}
-                      <Collapse in={growMessage > 0}>
-                        <ChatPoppup>
-                          <Typography color="primary.contrastText">
-                            What can i call you?
-                          </Typography>
-                        </ChatPoppup>
-                      </Collapse>
-                      <Collapse in={growMessage > -1}>
-                        <ChatPoppup>
-                          <Typography
-                            alignSelf="flex-end"
-                            textAlign={"right"}
-                            color="primary.contrastText"
-                          >
-                            Hi I am Bee!
-                          </Typography>
-                        </ChatPoppup>
-                      </Collapse>
-                    </Stack>
-                  </Collapse>
-                )}
+                        <Collapse in={growMessage > 1}>
+                          <ChatPoppup>
+                            <Typography color="primary.contrastText">
+                              Let explore the world of sports.
+                            </Typography>
+                          </ChatPoppup>
+                        </Collapse>
+                        <Collapse in={growMessage > 0}>
+                          <ChatPoppup>
+                            <Typography color="primary.contrastText">
+                              Welcome back {userName}!
+                            </Typography>
+                          </ChatPoppup>
+                        </Collapse>
+                      </Stack>
+                    </Collapse>
+                  ) : (
+                    <Collapse in={showChat}>
+                      <Stack spacing={2}>
+                        <Collapse in={growMessage > 5}>
+                          <Stack>
+                            <Button
+                              onClick={navigate}
+                              variant="contained"
+                              color="secondary"
+                            >
+                              Click here to Follow the bee
+                            </Button>
+                          </Stack>
+                        </Collapse>
+                        <Collapse in={growMessage > 4}>
+                          <ChatPoppup>
+                            <Typography color="primary.contrastText">
+                              Just follow me.
+                            </Typography>
+                          </ChatPoppup>
+                        </Collapse>
+                        <Collapse in={growMessage > 3}>
+                          <ChatPoppup>
+                            <Typography color="primary.contrastText">
+                              Very nice name, Nice to meet you {name}!
+                            </Typography>
+                          </ChatPoppup>
+                        </Collapse>
+                        {nameError.map((item, i) => (
+                          <Collapse in={!!item} key={`${item}-${i}`}>
+                            <ChatPoppup>
+                              <Typography color="primary.contrastText">
+                                {item}
+                              </Typography>
+                            </ChatPoppup>
+                          </Collapse>
+                        ))}
+                        <Collapse in={growMessage > 0}>
+                          <ChatPoppup>
+                            <Typography color="primary.contrastText">
+                              What can i call you?
+                            </Typography>
+                          </ChatPoppup>
+                        </Collapse>
+                        <Collapse in={growMessage > -1}>
+                          <ChatPoppup>
+                            <Typography
+                              alignSelf="flex-end"
+                              textAlign={"right"}
+                              color="primary.contrastText"
+                            >
+                              Hi I am Bee!
+                            </Typography>
+                          </ChatPoppup>
+                        </Collapse>
+                      </Stack>
+                    </Collapse>
+                  )}
+                </Stack>
               </Stack>
+              <FloatingBee translatePixel={"-30px"} />
             </Stack>
-            <FloatingBee translatePixel={"-30px"} />
           </Stack>
-        </Stack>
-      </Slide>
-    </Stack>
+        </Slide>
+      </Stack>
+    </>
   )
 }
 

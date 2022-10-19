@@ -9,6 +9,7 @@ import { GetServerSidePropsContext, NextPage } from "next"
 import { getNewsById } from "src/queries/news"
 import { News } from "src/model"
 import { formatDate } from "src/lib"
+import HeaderMeta from "src/components/common/header"
 
 interface NewsPageProps {
   news: News
@@ -18,6 +19,14 @@ const NewsPage: NextPage<NewsPageProps> = (props) => {
   const { news } = props
   return (
     <>
+      <HeaderMeta
+        data={{
+          title: `${news.title} | Clubee`,
+          description: news.description,
+          image: news.image,
+          author: news.author,
+        }}
+      />
       <Link href="/news">
         <a>
           <Stack direction="row" spacing={1} padding={2} alignItems="center">
