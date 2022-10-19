@@ -36,6 +36,9 @@ const CreateNews = (props: CreateNewsProps) => {
   const [description, setDescription] = useState("")
   const [descriptionError, setDescriptionError] = useState("")
 
+  useEffect(() => {
+    setAuthor(author)
+  }, [author])
   const validateForm = useCallback(() => {
     let status = true
     if (title.length < 5) {

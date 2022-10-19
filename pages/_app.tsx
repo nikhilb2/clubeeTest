@@ -26,6 +26,8 @@ const Comp = (props: AppProps) => {
     cacheKeys.userNameKey(),
     getUserNameFromLocalStorage
   )
+  console.log({ userName })
+
   return (
     <ThemeProvider theme={theme}>
       {asPath !== "/" && <AnimatedClubeeLogo />}
