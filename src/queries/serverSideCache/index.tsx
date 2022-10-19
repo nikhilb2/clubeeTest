@@ -15,11 +15,9 @@ export const fetchNewsAndAddToCache = async (): Promise<News[]> => {
         newsCache[item.id] = item
       })
     }
-    console.log("returned from cache")
 
     return news || []
   } catch (e) {
-    console.log(e)
     return []
   }
 }

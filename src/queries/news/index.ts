@@ -17,7 +17,6 @@ export const getNews = async () => {
   if (result.success) {
     return result.data as News[]
   }
-  console.log(result)
 
   throw new Error(result.error, {
     cause: new Error(result.message),

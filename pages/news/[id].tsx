@@ -115,8 +115,6 @@ const NewsPage: NextPage<NewsPageProps> = (props) => {
 }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  console.log("1")
-
   const id = String(ctx.query.id)
   const allNews = await getNewsFromCacheAndSync()
   const cachedNews = allNews.find((item) => item.id === id)
@@ -127,15 +125,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     }
   }
-  console.log("2")
 
   const fetchedNews = await getNewsById(id)
-  console.log("3")
+
   if (!fetchedNews) {
-    console.log("4")
     return { redirect: { permanent: false, destination: "/404" } }
   }
-  console.log("5")
+
   return {
     props: {
       news: fetchedNews,
