@@ -13,17 +13,10 @@ import { getUserNameFromLocalStorage } from "src/queries/auth"
 
 const Comp = (props: AppProps) => {
   const { Component, pageProps } = props
-  const { asPath, push } = useRouter()
+  const { asPath } = useRouter()
   const { data: userName } = useQuery(
     cacheKeys.userNameKey(),
-    getUserNameFromLocalStorage,
-    {
-      onSuccess: (result) => {
-        if (asPath !== "/" && !result) {
-          push("/")
-        }
-      },
-    }
+    getUserNameFromLocalStorage
   )
   return (
     <ThemeProvider theme={theme}>
