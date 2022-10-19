@@ -17,3 +17,7 @@ export interface PostNewsParams {
   image: string
   author: string
 }
+
+export type ErrorResponse = {
+  error?: string
+}

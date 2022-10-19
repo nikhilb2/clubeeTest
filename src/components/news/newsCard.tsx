@@ -98,7 +98,7 @@ interface NewsCardProps {
 const NewsCard = (props: NewsCardProps) => {
   const { news } = props
   return (
-    <Link href={`/news/test`} as={`/news/test`}>
+    <Link href={`/news/${news.id}`} as={`/news/${news.id}`}>
       <a>
         <article>
           <Stack sx={styles.container}>

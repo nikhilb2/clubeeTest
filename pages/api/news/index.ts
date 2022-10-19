@@ -3,15 +3,8 @@ import path from "path"
 import { promises as fs } from "fs"
 import type { NextApiRequest, NextApiResponse } from "next"
 import { apiBodyValidator, slugify } from "src/lib"
-import { News, NewsJson } from "src/model"
+import { ErrorResponse, News, NewsJson } from "src/model"
 
-type GetNews = News[]
-
-type PostNews = News
-
-type FourHundredFive = {
-  error?: string
-}
 const readFile = async () => {
   const jsonDirectory = path.join(process.cwd(), "/src/api/")
   const file = await fs.readFile(jsonDirectory + "news.json", "utf8")
@@ -52,7 +45,7 @@ const writeFile = async (body: {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<GetNews | FourHundredFive | PostNews>
+  res: NextApiResponse<News[] | News | ErrorResponse>
 ) {
   if (req.method === "GET") {
     const data = await readFile()

@@ -4,7 +4,17 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos"
 import { moreStyles } from "src/theme"
 import Link from "next/link"
 import Image from "next/image"
-const NewsPage = () => {
+import { getNewsFromCacheAndSync } from "src/queries/serverSideCache"
+import { GetServerSidePropsContext, NextPage } from "next"
+import { getNewsById } from "src/queries/news"
+import { News } from "src/model"
+
+interface NewsPageProps {
+  news: News
+}
+
+const NewsPage: NextPage<NewsPageProps> = (props) => {
+  const { news } = props
   return (
     <>
       <Link href="/news">
@@ -21,7 +31,7 @@ const NewsPage = () => {
         <Stack spacing={2}>
           <Stack>
             <Image
-              src="/img/placeholder-image.png"
+              src={news.image}
               width="1090px"
               height={"595px"}
               objectFit="contain"
@@ -43,7 +53,7 @@ const NewsPage = () => {
               >
                 By:
               </Box>{" "}
-              Nikhil Bhatia
+              {news.author}
             </Typography>
             <Typography fontSize={{ md: "18px", xs: "14px" }}>
               {" "}
@@ -55,7 +65,7 @@ const NewsPage = () => {
               >
                 Date:
               </Box>{" "}
-              18th Oct 2022
+              {news.date}
             </Typography>
             <Typography fontSize={{ md: "18px", xs: "14px" }}>
               {" "}
@@ -78,31 +88,41 @@ const NewsPage = () => {
             textAlign="center"
             fontWeight={500}
           >
-            Singapore Licensing VASPs – Complying with AML/CTF requirements on
-            virtual assets
+            {news.title}
           </Typography>
           <Typography fontSize={{ md: "18px", xs: "14px" }}>
-            Singapore’s Central Bank, the Monetary Authority of Singapore (MAS)
-            is preparing to hand out payment services licenses to virtual asset
-            service providers (VASPs) as reported by the South China Morning
-            Post1 earlier this month. The Central Bank notified several
-            applicants (out of 170) that they will get licensed to operate in
-            the city-state if they put in place measures to meet the
-            requirements set by the MAS. Some applicants did not meet its
-            standards “in the area of money laundering and terrorism financing
-            and technology risk controls”: two applications had already been
-            rejected while 30 were withdrawn. The Authority already granted 2
-            in-principle approvals to an Australian exchange and a Singaporean
-            bank2 last week. Singapore is one of the crypto hubs in Asia along
-            with Hong Kong that also recently implemented stricter rules on
-            cryptocurrencies. The news was welcomed by the crypto industry as
-            some believe it will help increase crypto adoption of institutions
-            notably and attract virtual asset companies to the city.
+            {news.description}
           </Typography>
         </Stack>
       </Stack>
     </>
   )
+}
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  console.log(JSON.stringify(ctx.query))
+
+  const id = String(ctx.query.id)
+  const allNews = await getNewsFromCacheAndSync()
+  const cachedNews = allNews.find((item) => item.id === id)
+  if (cachedNews) {
+    return {
+      props: {
+        news: cachedNews,
+      },
+    }
+  }
+
+  try {
+    const fetchedNews = await getNewsById(id)
+    return {
+      props: {
+        news: fetchedNews,
+      },
+    }
+  } catch (e) {
+    return { redirect: { permanent: false, destination: "/404" } }
+  }
 }
 
 export default NewsPage
