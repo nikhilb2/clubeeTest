@@ -120,7 +120,7 @@ const CreateNews = (props: CreateNewsProps) => {
           right: 20,
         }}
       >
-        <Fab onClick={() => setShowCreateNews(true)}>
+        <Fab onClick={() => setShowCreateNews(true)} color="primary">
           <AddIcon />
         </Fab>
       </Box>
@@ -131,7 +131,10 @@ const CreateNews = (props: CreateNewsProps) => {
           resetForm()
         }}
       >
-        <Stack width={700}>
+        <Stack
+          width={{ xs: "85vw", sm: 700 }}
+          height={{ xs: "93vh", sm: undefined }}
+        >
           <Collapse in={!isSuccess}>
             <Typography variant="h5">Create news</Typography>
             <Typography variant="caption">
