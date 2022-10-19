@@ -1,5 +1,5 @@
 const conf = {
-  API_ROOT: "http://localhost:3000/api/",
+  API_ROOT: "https://test.zefiri.com/api/",
 }
 
 export default conf
