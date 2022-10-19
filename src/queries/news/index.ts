@@ -28,7 +28,5 @@ export const getNewsById = async (id: string) => {
   if (result.success) {
     return result.data as News
   }
-  throw new Error(result.error, {
-    cause: new Error(result.message),
-  })
+  return undefined
 }

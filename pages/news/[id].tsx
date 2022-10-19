@@ -128,15 +128,14 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     }
   }
 
-  try {
-    const fetchedNews = await getNewsById(id)
-    return {
-      props: {
-        news: fetchedNews,
-      },
-    }
-  } catch (e) {
+  const fetchedNews = await getNewsById(id)
+  if (!fetchedNews) {
     return { redirect: { permanent: false, destination: "/404" } }
+  }
+  return {
+    props: {
+      news: fetchedNews,
+    },
   }
 }
 
