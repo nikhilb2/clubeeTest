@@ -89,7 +89,7 @@ const WelcomeBee: NextPage<WelcomeBeeProps> = (props) => {
     const audio = new Audio("sounds/buzz.mp3")
     audio.volume = 0.1
     audio.play()
-  }, [name])
+  }, [name, router])
   return (
     <Stack
       direction="row"
@@ -206,8 +206,8 @@ const WelcomeBee: NextPage<WelcomeBeeProps> = (props) => {
                           </Typography>
                         </ChatPoppup>
                       </Collapse>
-                      {nameError.map((item) => (
-                        <Collapse in={!!item}>
+                      {nameError.map((item, i) => (
+                        <Collapse in={!!item} key={`${item}-${i}`}>
                           <ChatPoppup>
                             <Typography color="primary.contrastText">
                               {item}

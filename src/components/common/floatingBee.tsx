@@ -27,7 +27,13 @@ const FloatingBee = (props: FloatingBeeProps) => {
   }, [translatePixel])
   return (
     <Stack sx={animation}>
-      <Image priority src="/img/bee.svg" width="100px" height={"100px"} />
+      <Image
+        priority
+        src="/img/bee.svg"
+        width="100px"
+        height={"100px"}
+        alt="bee"
+      />
     </Stack>
   )
 }

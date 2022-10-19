@@ -26,6 +26,7 @@ const AnimatedClubeeLogo = () => {
       <Fade in={fadeIn} timeout={500}>
         <Box>
           <Image
+            alt={"bee"}
             src="/img/clubWithoutBee.svg"
             width={400}
             height={120}

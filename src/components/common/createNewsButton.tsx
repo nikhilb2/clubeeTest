@@ -179,6 +179,7 @@ const CreateNews = (props: CreateNewsProps) => {
                 <Stack height="200px" width="300px">
                   {!!image && (
                     <Image
+                      alt={"image"}
                       src={`https://loremflickr.com/1000/500/sports?random=${image}`}
                       width="300px"
                       height="200px"
