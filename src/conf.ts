@@ -1,5 +1,5 @@
 const conf = {
-  API_ROOT: "https://test.zefiri.com/api/",
+  API_ROOT: "https://clubee-test.vercel.app/api/",
 }
 
 export default conf
